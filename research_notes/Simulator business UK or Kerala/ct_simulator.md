@@ -1,20 +1,36 @@
 # CT Scanner Console Simulator for Radiographer Training: Market and Technical Feasibility (as of 8 November 2026)
 
-**How these notes were sourced.** Every page fetch failed. scanflo.io, www.aerb.gov.in and www.gov.uk all returned DNS "ENOTFOUND" in this session, even though they were said to be allowed. So **every figure below is [SEARCH]**: it comes from a search-result summary, not from reading the page. None is [LIVE]. Search summaries sometimes misread tables and dates. Where that looked likely, a caveat is given. Physics relationships that come from background knowledge, not from a source found in this session, are marked **[background knowledge]** and appear only under Inferences.
+**How these notes were sourced.**
+- **First pass (8 November 2026):** WebFetch failed for every page, so most figures are **[SEARCH]**. That means they come from a search-result summary, not from reading the page.
+- **Verification round (same day):** pages were read as text with curl. Figures read on the page itself are marked **[LIVE]**:
+  - scanflo.io: /ct, /pricing (including the plan catalogue embedded in the page) and one blog post
+  - the gov.uk UK NDRL page, updated 11 December 2025
+  - the www.corsmed.com and www.mrieducation.com homepages
+- www.aerb.gov.in still timed out, so AERB items stay [SEARCH].
+- Search summaries sometimes misread tables and dates. Where that looked likely, a caveat is given.
+- Physics relationships from background knowledge are marked **[background knowledge]** and appear only under Inferences.
 
 ---
 
 ## 1. Competitors: who sells CT simulators for radiographer training, what they do, how they are delivered, and what they cost
 
 ### Takeaway
-The CT-training simulator market is small and split into five groups:
+The CT-training simulator market is small.
+
+**The most direct competitor is ScanFlo CT** (Zeka Labs, Delhi). It is a browser CT console simulator priced in INR, from ₹899 a month. It already covers topogram planning, kV/mAs/pitch, CTDIvol/DLP, kernels, windowing, contrast-timing guides and MPR/3D [LIVE].
+
+The rest of the market splits into five groups:
 - one UK desktop or VR incumbent (Shaderware TomoVR, which now appears to be marketed through RadSimTech)
 - one US VR/desktop product sold inside US$1,700–2,500 course bundles (ScanLabCT)
 - vendor-locked cloud consoles for each manufacturer's own customers (Siemens SmartSimulator)
 - academic or free tools (CTSim from UCD and HVL, IAEA RadSimCT, jsctsim)
 - open-source physics toolkits for developers (XCIST, TIGRE, gVirtualXray)
 
-No competitor was found that is all of these at once: browser-only, priced for individual learners in India or the Gulf, and multi-vendor in console style. No ScanFlo CT product could be confirmed.
+The first pass assumed an empty "browser + INR pricing" niche. That was wrong: ScanFlo already occupies it. What is left is room to differentiate, not to be first. Possible angles:
+- phone support (ScanFlo asks for a laptop or desktop)
+- UK/NHS and Gulf exam content
+- lessons on positioning, off-centring and AEC errors
+- an MRI+CT bundle discount (ScanFlo sells the two as separate plans)
 
 ### Cited Findings
 
@@ -79,22 +95,47 @@ No competitor was found that is all of these at once: browser-only, priced for i
 - **TIGRE** (CERN) is a GPU tomographic reconstruction toolbox under the **BSD licence**, with a citation requested [SEARCH] — [github.com/CERN/TIGRE](https://github.com/CERN/TIGRE)
 - **gVirtualXray (gVXR)** is under the **BSD 3-Clause** licence. Its WebCT web GUI needs an NVIDIA GPU on the host for reconstruction, so it is not a pure browser client [SEARCH] — [PyPI gVXR](https://pypi.org/project/gVXR/); [WebCT post](https://gvirtualxray.sourceforge.io/applications/post-2025a)
 
-**ScanFlo (India)**
-- A search for a ScanFlo CT simulator returned nothing, and the scanflo.io fetch failed with a DNS error. **No ScanFlo CT product could be confirmed.** [no result] — search attempted; [scanflo.io fetch blocked]
+**ScanFlo CT (India): the direct competitor** [LIVE] — [scanflo.io/ct](https://scanflo.io/ct); [scanflo.io/pricing](https://scanflo.io/pricing)
+- Seller: Zeka Labs Private Limited, Rohini, Delhi (CIN U86909DL2023PTC420560).
+- Products: ScanFlo MRI, CT, PET-CT, Anatomy (a 3D atlas) and RadPath. ScanFlo XR (X-ray) is "launching soon".
+- Pitch: "The CT scan simulator for radiography training. Protocols and dose, learnt together, from scout to helical acquisition to reconstruction." It "runs in a browser on cases built from real patient scans".
+- The page states outright that it is not the radiotherapy "CT simulator".
+- What learners can drive:
+  - acquisition: scout/topogram, helical and axial modes, HRCT, cardiac protocol families
+  - exposure: kVp and mAs "with live image-quality and dose consequences"
+  - geometry: pitch, collimation and rotation time
+  - dose: "CTDIvol and DLP reported on every acquisition"
+  - reconstruction: kernels from soft to sharp, slice thickness, window/level, and lung, mediastinal and bone windows
+  - MPR and 3D volume rendering, plus filming (e.g. 5×6 layouts, PDF export)
+  - AI: a "Study Advisor" that goes from clinical question to protocol, and "deep-learning image enhancement"
+  - protocol library: routine head, chest and abdomen, HRCT, cardiac concepts and timing, with guided cases and exercises
+  - guides on contrast timing and bolus tracking, dose metrics and protocol basics
+- Not mentioned on the CT page: artefact simulation, AEC or tube-current modulation, patient positioning or off-centring, contrast-reaction or eGFR scenarios, and comparison with DRLs. This is inferred from their absence on the page.
+- Delivery: "A modern browser on a laptop or desktop. There is nothing to install." Licensing is per device: sign-in on up to 2 devices, one in use at a time.
+- Free trial: 45 minutes of console time to use within 7 days, no card needed. There is a separate trial for each of MRI, CT, PET-CT, Anatomy and RadPath.
+- Prices: see section 5. CT Student is ₹899 a month or US$39. CT Student Pro is ₹1,399 a month or US$49. Annual plans are ₹8,999 and ₹13,999.
+- Bundling: "CT and MRI are separate plans, each with its own free 45-minute trial, and institutional licences can cover both".
+- Institutions get custom seat pricing with instructor visibility, progress records and invoice billing.
+- The site also exists in Spanish and French.
+
+**Corsmed and MRI in Practice (mrieducation.com)** [LIVE] — [corsmed.com](https://www.corsmed.com); [mrieducation.com](https://www.mrieducation.com)
+- Neither homepage mentions CT.
+- Corsmed's page title is "Corsmed – MRI Simulator for Training and Education".
+- mrieducation.com's title is "Online MRI Course | CPD Endorsed | MRI in Practice".
 
 **A naming collision to be aware of**
 - In India, "CT simulator" commonly means a **radiotherapy CT-simulation scanner**, which is real hardware. For example, a 2026 Tata Memorial Centre tender asks for a "CT Scan 128 Slice Simulator Wide Bore Flat Bed" [SEARCH] — [Tata Memorial Centre tender notice](https://docs.infralens.in/nit/2026_TMC_908208_1/Tendernotice_1.pdf)
 
 ### Inferences
-- The only clearly priced comparable is ScanLabCT, at about US$1,700–2,500 including a course and 3–6 months of access. That price is pitched at US technologists earning US salaries, which leaves a large gap for a ₹/AED/£-priced, browser-only product.
+- ScanFlo CT sets the real price anchor for this brand: ₹899 a month, or US$39 outside India. ScanLabCT's US$1,700–2,500 US course bundles are not the comparison. A Mallu Radiographer CT product would compete with ScanFlo on price and features.
 - Shaderware and TomoVR hold UK university relationships. If the founder sells to UK HEIs, TomoVR is the incumbent, and the pitch would be "browser, no install, per-student pricing, cheaper".
 - Siemens SmartSimulator is a real Siemens console in the cloud, but it is tied to Siemens customers and to one manufacturer. Indian and Gulf radiographers working on GE scanners (the largest Indian installed base; see section 2) have no equivalent free vendor tool that turned up in these searches.
-- The free academic tools (CTSim, RadSimCT, jsctsim) teach parameter-to-image relationships. They do not appear to simulate a full exam workflow (patient set-up → scout → plan → contrast → recon → dose report) with exam-prep framing. That workflow is the gap a commercial product can fill.
+- The free academic tools (CTSim, RadSimCT, jsctsim) teach parameter-to-image relationships. They do not appear to simulate a full exam workflow (patient set-up → scout → plan → contrast → recon → dose report) with exam-prep framing. ScanFlo CT already covers much of that workflow. What its CT page does not show: artefacts, AEC and off-centring, patient-safety scenarios, comparison with DRLs, and phone support.
 - The brand should say "CT *scanning* simulator" or "CT console trainer", not "CT simulator", in India. That avoids confusion with radiotherapy CT-sim hardware in search results and in procurement.
 
 ### Gaps
 - TomoVR's actual feature list (topogram, AEC/tube-current modulation, dose display, contrast, kernels), its price and its UK customer list were not found. Shaderware/RadSimTech pages could not be fetched.
-- ScanFlo: whether it has or plans a CT module is unknown, because the fetch was blocked.
+- ScanFlo CT: user and customer numbers, institutional prices, and whether artefacts or AEC are simulated are not stated on the pages read.
 - GE HealthCare, Philips and Canon CT training simulators were not found in searches. Each likely has its own customer e-learning and console emulators, but that is not verified.
 - Medality and "Virtual Medical Coaching CT": no current product information found.
 - XCIST licence: not confirmed (check the LICENSE file on GitHub).
@@ -104,7 +145,7 @@ No competitor was found that is all of these at once: browser-only, priced for i
 ## 2. Demand: CT vs MRI in India (and Kerala), the UK and the Gulf, plus regulatory training requirements (AERB, IR(ME)R, Gulf licensing)
 
 ### Takeaway
-On every indicator found, CT is the larger modality: installed units, scan volume and job demand. The ratio is roughly 1.7× MRI by monthly scan volume in England (2026), and about 2–3× by installed units in India. The ratio in Kerala hospitals looks higher. A medical-college data point shows 85 CT scans a day against 25 MRI.
+On every indicator found, CT is the larger modality: installed units, scan volume and job demand. The ratio is roughly 1.7× MRI by monthly scan volume in England (2026). In India it is about 1.6× or more by installed units: 8,202 CT units on the AERB portal in August 2023, against an estimated fewer than 5,000 MRI. The ratio in Kerala hospitals looks higher. A medical-college data point shows 85 CT scans a day against 25 MRI.
 
 Regulators require **qualified, experienced** CT operators: AERB in India and Schedule 3 training under IR(ME)R in the UK. Nothing found says simulation counts toward those requirements. A no-radiation simulator therefore fits as **preparation and CPD**, not as a replacement for supervised clinical CT hours.
 
@@ -123,6 +164,12 @@ The Gulf licensing exams have explicit CT content. Saudi Arabia (SCFHS) even has
 
   [SEARCH] — [CCI market study PDF](https://www.cci.gov.in/public/images/marketstudie/en/market-study-of-diagnostic-medical-imaging-equipment-industry-in-india1724145632.pdf); [Lexology summary](https://www.lexology.com/library/detail.aspx?g=5063278c-1c3b-4aa1-a059-9ec34e00323b)
 - A secondary site says the CCI report gives GE **3,671 installed CT scanners** in India. This was not checked against the CCI table [SEARCH] — [Research Nester](https://www.researchnester.com/reports/computed-tomography-market/8338)
+- **"AERB's portal listed 8,202 CT scanners in August 2023."** This comes from a ScanFlo blog post dated 3 October 2026, which cites the CCI 2024 study. It is a secondary source, but it matches the estimate worked out from the CCI figures (see Inferences). The same post says "We could not find an official count of MRI scanners in India" [LIVE] — [ScanFlo blog: CT vs MRI](https://scanflo.io/blog/ct-vs-mri-which-modality-to-specialise-in)
+- Salaries and training in India, as reported in that blog post [LIVE] — [ScanFlo blog](https://scanflo.io/blog/ct-vs-mri-which-modality-to-specialise-in):
+  - AmbitionBox salary bands: about ₹3.4–3.7 lakh a year for CT, ₹3.5–3.9 lakh for MRI, and ₹3.7–4.1 lakh for staff who run both
+  - a 2014 survey of 174 Indian technologists found only 32% had formal radiation-safety training (Muthusami et al., *Radiologic Technology* 2014)
+  - the CCI 2024 study flagged "a lack of availability of skilled personnel across the value chain"
+  - UK: the SoR reported a 12.8% vacancy rate (Synergy, 2024), and 8.1% of headcount had been recruited internationally in the previous year (SoR census 2022)
 - Other figures that conflict or are low quality [SEARCH]:
   - "over 15,000 CT units installed nationwide", a refurbished-equipment vendor blog with no source — [Sunrays Medical 2026](https://www.sunraysmedical.com/guide/refurbished-ct-scanner-buying-guide-india-2026)
   - "3,500 CT scanners installed at hospitals in India", an old estimate from a GE launch article about a decade ago — [AuntMinnie](https://www.auntminnie.com/clinical-news/ct/article/15612048/ge-launches-ct-scanner-made-in-india)
@@ -182,15 +229,15 @@ The Gulf licensing exams have explicit CT content. Saudi Arabia (SCFHS) even has
 - The University of Cumbria is giving diagnostic radiography students immersive training [SEARCH] — [University of Cumbria news](https://news.cumbria.ac.uk/news/the-university-of-cumbria-empowers-the-next-generation-of-diagnostic-radiographers-with-immersive-training-opportunities)
 
 ### Inferences
-- **CT is the bigger addressable skill.** England runs about 1.7 CT scans per MRI scan. India's installed CT base is plausibly 2–3× MRI: ~4,800–5,000 MRI against "3X" CT. Kerala medical-college throughput is about 3.4 CT scans per MRI scan (Alappuzha). On demand alone, a CT simulator addresses more working radiographers than the MRI one.
-- **Estimated size of India's registered CT base:** if GE's 3,671 units (secondary source) and the 44.8% share (CCI) are both right, India has about **8,200 AERB-registered CT units** (3,671 ÷ 0.448). That sits between the old 3,500 and the unsourced 15,000. Treat it as an estimate until Table 6 of the CCI study is read.
+- **CT is the bigger addressable skill.** England runs about 1.7 CT scans per MRI scan. India has about 8,200 CT units against an estimated ~4,800–5,000 MRI, so roughly 1.6–1.7× MRI. Kerala medical-college throughput is about 3.4 CT scans per MRI scan (Alappuzha). On demand alone, a CT simulator addresses more working radiographers than the MRI one.
+- **India's registered CT base:** GE's 3,671 units (secondary source) divided by its 44.8% share (CCI) gives about 8,194 units. That closely matches the 8,202 AERB-portal figure for August 2023 quoted on ScanFlo's blog. So **about 8,200 CT units** is a reasonable working number. BioSpectrum's claim that MRI is "3X lower than CT" looks too high: the ratio is more like 1.6×.
 - **Why CT practice is hard to get in India:** the AERB rules on qualified operators and RSOs, plus the 3-year CT experience requirement for the RSO route, mean juniors get little hands-on control of the console. That supports a "practise before you touch the real scanner" pitch. The product must not claim AERB recognition, accreditation or contribution to licensing hours. No source shows AERB accepting simulator time.
 - **UK positioning:** IR(ME)R Schedule 3 asks for training that is relevant and documented. A simulator can support it as structured, documented pre-clinical training and CPD, for example by exporting a certificate or log for the employer's training record. It does not replace employer-signed competency. Nothing found shows a UK regulator or employer formally "accepting" simulation for CT operator entitlement.
 - **Gulf positioning:** the SCFHS CT-specific promotion blueprints (CT physics 30%, image quality, post-processing 10%) map directly onto simulator content. That supports a "Gulf exam + CT skills" package. The DHA weighting is unconfirmed.
 - **Indian radiographers seeking Gulf jobs:** Dubai employers advertise roles that ask for "CT and MRI" experience. A CT+MRI bundle matches the job adverts better than MRI alone.
 
 ### Gaps
-- No authoritative national CT unit total for India. It is in Table 6 of the CCI August 2024 study and on the AERB portal, neither of which could be fetched.
+- The 8,202 CT figure was read on ScanFlo's blog, not in the CCI PDF or on the AERB portal itself. There is still no official national MRI count.
 - No Kerala statewide CT or MRI count.
 - No CT technologist workforce numbers for India (e.g., MRIT/BSc graduates) or UK (CT-specialised radiographers) were found.
 - AERB's exact **CT operator** qualification wording in the current Safety Code (AERB/RF-MED/SC-3) was not read. Only RSO routes were found.
@@ -216,7 +263,30 @@ Published CT simulators justify themselves by giving trainees safe practice with
 - CTSim was built because CT training is "limited in terms of practical experience with **scan parameters** due to patient safety and busy departments". It offers freestyle and guided modes plus self-assessment [SEARCH] — [CTSim eprint](https://eprints.teachingandlearning.ie/id/eprint/5389/)
 - Students saw better transfer to practice when the simulator matched their placement scanner [SEARCH] — [Monash 2024](https://research.monash.edu/en/publications/transferability-of-learning-from-computed-tomography-simulation-i/)
 - CTDIvol and DLP are the quantities used to set CT DRLs, and SSDE may help optimisation [SEARCH] — [gov.uk NDRL guidance](https://gov.uk/government/publications/diagnostic-radiology-national-diagnostic-reference-levels-ndrls/national-diagnostic-reference-levels-ndrls)
-- **UK NDRL values (older version, possibly out of date):** the gov.uk page titled "National Diagnostic Reference Levels: 22 January 2016 to 14 November 2018" lists adult acute stroke head CT as CTDIvol 80 mGy (posterior fossa) and 60 mGy (cerebrum and whole brain), with **DLP 970 mGy·cm**. These derive from PHE-CRCE-013 (2011 review). The current UKHSA values were not retrieved [SEARCH] — [gov.uk NDRLs](https://gov.uk/government/publications/diagnostic-radiology-national-diagnostic-reference-levels-ndrls/national-diagnostic-reference-levels-ndrls)
+- **Current UK NDRLs for adult CT** (gov.uk page "updated 11 December 2025"; most values adopted in 2022). These replace the older 2016–2018 values found in the first pass (stroke head DLP 970 mGy·cm), which are now superseded. Head and sinus values refer to the 16 cm CTDI phantom; all others to the 32 cm phantom. The page cautions that the current "chest" NDRL is not directly comparable with the earlier one, which extended to the liver [LIVE] — [gov.uk NDRL page](https://www.gov.uk/government/publications/diagnostic-radiology-national-diagnostic-reference-levels-ndrls/ndrl)
+
+  | Exam (indication) | CTDIvol per sequence (mGy) | DLP per exam (mGy·cm) | Adopted |
+  |---|---|---|---|
+  | Head (acute stroke) | 47 | 790 | 2022 |
+  | Paranasal sinuses | 12 | 160 | 2022 |
+  | Cervical spine (fracture) | 16 | 400 | 2022 |
+  | Neck, chest, abdomen, pelvis (cancer) | — | 850 | 2022 |
+  | Chest (lung cancer) | 8.5 | 290 | 2022 |
+  | Chest and abdomen (lung cancer) | — | 470 | 2022 |
+  | HRCT chest (interstitial lung disease) | 8 | 300 | 2022 |
+  | Chest, abdomen, pelvis (cancer) | — | 660 | 2022 |
+  | CTPA (pulmonary embolism) | 9.1 | 310 | 2022 |
+  | Abdomen and pelvis (abscess) | 10 | 530 | 2022 |
+  | Virtual colonoscopy | — | 690 | 2022 |
+  | KUB (stones/colic) | 6.3 | 290 | 2022 |
+  | Urogram | — | 890 | 2022 |
+  | Coronary CTA: prospective, no padding / with padding / retrospective gated | — | 170 / 280 / 380 | 2018 |
+
+  "—" means the page gives a DLP value only.
+
+- **UK paediatric CT NDRLs** (same page, adopted 2022) [LIVE]:
+  - Head (trauma): 19 mGy / 290 mGy·cm (under 1 year); 24 / 420 (1 to under 5); 36 / 570 (5 to under 10); 46 / 690 (10 to under 15); adult values from age 15
+  - Chest (query cancer): 0.44 / 8 (under 5 kg) up to 3.8 / 110 (50 to under 80 kg)
 - **India regional DRL benchmarks (no national DRLs at the time):** the Kerala 2018 multicentre study across 7 hospitals gives 75th percentiles [SEARCH] — [IJRI 2018](https://www.thieme-connect.com/products/ejournals/html/10.4103/ijri.IJRI_394_17):
 
   | Exam (single phase) | CTDIvol (mGy) | DLP (mGy·cm) | Effective dose (mSv) |
@@ -243,14 +313,14 @@ These come from the founder-radiographer context, standard CT practice and the s
 2. Scout/topogram: AP and lateral, kV and mA for the scout, scout direction. It drives AEC.
 3. Planning the scan range on the scout: start and end lines, FOV/DFOV, gantry tilt for head.
 4. Protocol selection with editable kV (80/100/120/140), reference mAs or noise index (AEC), rotation time, pitch, collimation and slice thickness.
-5. Live dose readout: CTDIvol and DLP, compared with UK NDRL or Indian regional benchmarks, with a DRL-exceeded warning.
+5. Live dose readout: CTDIvol and DLP, compared with the UK NDRLs (e.g. stroke head 47 mGy / 790 mGy·cm) or Indian regional benchmarks, with a DRL-exceeded warning.
 6. Reconstruction: slice thickness and interval, soft-tissue/lung/bone kernels, windowing presets (brain, subdural, stroke, lung, mediastinum, bone, liver), MPR.
 7. Artefacts on demand: motion, metal (streaks), beam hardening (posterior fossa or shoulders), partial volume, ring, truncation from a patient outside the FOV.
 
 **Phase 2 paid packages**
 - Contrast: injector rate and volume, bolus tracking with an ROI on the aorta or pulmonary trunk and a HU trigger threshold, scan delays for arterial, portal-venous and delayed phases, test bolus.
 - Emergency protocols:
-  - stroke CT, CTA and CT perfusion (link to the UK stroke DRL above)
+  - stroke CT, CTA and CT perfusion (link to the UK stroke NDRL above)
   - trauma whole-body CT
   - CTPA
   - CT KUB at low dose
@@ -268,7 +338,7 @@ These come from the founder-radiographer context, standard CT practice and the s
 
 ### Gaps
 - No primary educator-needs survey for CT simulation in India or the Gulf was found.
-- Current UK NDRLs (latest UKHSA update) and any current AERB national CT DRLs were not retrieved, because the gov.uk and aerb.gov.in fetches were blocked.
+- Current UK NDRLs are now verified [LIVE]. Any current AERB national CT DRLs remain unretrieved, because aerb.gov.in times out.
 - No source on RCR or ESUR contrast guidance was fetched in this session.
 
 ---
@@ -353,15 +423,36 @@ The physics in this section is **[background knowledge]**, not from sources fetc
 ## 5. Pricing benchmarks, and whether bundling MRI with CT changes willingness to pay
 
 ### Takeaway
-The only published CT simulator prices are US course bundles at about **US$1,700–2,500**:
+**ScanFlo CT is the price benchmark that matters** [LIVE]. It is sold in India as one-time fixed-term plans with no auto-renewal (full table below):
+- Student: ₹899 a month, ₹2,499 for 3 months, ₹8,999 a year
+- Student Pro: ₹1,399, ₹3,999 and ₹13,999
+- Outside India: US$39 / $109 / $399 for Student, and $49 / $139 / $499 for Student Pro
+
+US course bundles cost far more:
 - ScanLabCT + ImagingU: $2,500 for 6 months' access plus a course
 - MTMI course with ScanLab practice: about $1,715–2,970, depending on year and tier
 
-Institutional products (Shaderware/TomoVR, Siemens PEPconnections/SmartSimulator) are quote-only. Free options exist in the IAEA and academic space but are not exam-oriented workflow trainers.
+Institutional products (Shaderware/TomoVR, Siemens PEPconnections/SmartSimulator, and ScanFlo's institution tier) are priced by quote. Free options exist from the IAEA and academic groups, but they are not exam-oriented workflow trainers.
 
-Incumbents bundle. ScanLab sells "One Platform … MRI & CT", and ImagingU pairs simulators with courses. That is indirect evidence that a combined MRI+CT offer is the market norm. No data was found that quantifies how bundling changes willingness to pay.
+US incumbents bundle: ScanLab sells "One Platform … MRI & CT", and ImagingU pairs simulators with courses. ScanFlo, by contrast, sells MRI and CT as **separate plans** at almost the same price; CT is ₹100 a month cheaper. No data was found that quantifies how bundling changes willingness to pay.
 
 ### Cited Findings
+- **ScanFlo plans**, from the plan catalogue embedded in scanflo.io/pricing [LIVE] — [scanflo.io/pricing](https://scanflo.io/pricing):
+
+  | Plan | 1 month | 3 months | 1 year |
+  |---|---|---|---|
+  | CT Student | ₹899 / US$39 | ₹2,499 / $109 | ₹8,999 / $399 |
+  | CT Student Pro (adds coronary angio, CT angiography, triphasic liver, enterography, complete case library) | ₹1,399 / $49 | ₹3,999 / $139 | ₹13,999 / $499 |
+  | MRI Student (76 routine cases) | ₹999 / $39 | ₹2,799 / $109 | ₹9,999 / $399 |
+  | MRI Student Pro (adds cardiac, spectroscopy, MRCP, prostate, pituitary, breast, fetal) | ₹1,499 / $49 | ₹4,199 / $139 | ₹14,999 / $499 |
+  | Anatomy or RadPath Student | — | ₹1,299 | — |
+  | XR Student / Pro (launch prices) | — | ₹2,499 / ₹3,999 | — |
+
+  - Console time is capped: 50 hours a month in India and 100 hours internationally on monthly plans, and 600 or 1,200 hours on annual plans.
+  - Payments go through Razorpay (UPI, cards, netbanking, wallets).
+  - The currency (INR or USD) is set by the country code of the phone number on the account, with taxes added at checkout.
+  - Paid access is non-refundable once activated, and upgrades are pro-rated.
+  - The CT product page headline says "From ₹899 /month".
 - ScanLabCT + ImagingU: **US$2,500** for 6 months of simulator access, 1 year of course, a syllabus and weekly instructor office hours. The page is undated [SEARCH] — [ScanLab CT Individual Cohorts](https://scanlabmr.com/ct-individual-cohorts/)
 - MTMI CT training course with ScanLab practice. The search summaries garble the price tables, so the exact tier is uncertain [SEARCH] — [MTMI 2026 flyer](https://www.mtmi.net/sites/default/files/2025-12/CT_Training_Course_Flyer_for_2026_%282%29.pdf); [MTMI 2025 flyer](https://www.mtmi.net/sites/default/files/2025-03/CT_Training_Course_Flyer_for_2025.pdf):
   - 2026: **US$1,715** ("$300 reduction"), with 3 months of ScanLab access
@@ -375,17 +466,18 @@ Incumbents bundle. ScanLab sells "One Platform … MRI & CT", and ImagingU pairs
 - Context for willingness to pay in the Gulf: Dubai CT/MRI technologist salaries are **AED 10,000–12,000 a month** and Saudi salaries are **SAR 6,000–14,000 a month** [SEARCH] — [Careerjet UAE](https://www.careerjet.ae/jobad/ae669b10da3a58d2b3a37f261f129bf4d6); [Neelim](https://neelim.com/blog/radiographer-license-gcc)
 
 ### Inferences
-- US$1,700–2,500 is a ceiling for US-certified technologists, with a course and an instructor included. It does not transfer to India. A self-serve browser simulator with no instructor should be priced well below that.
-- Suggested price anchors: about **10–20% of the US bundle in the Gulf and UK**, and much lower in India. These are anchors to test with the free demo scan, not evidence-based price points. MRI pricing benchmarks from the sibling research should be used for consistency.
+- US$1,700–2,500 is a ceiling for US-certified technologists, with a course and an instructor included. It is not the relevant comparison.
+- ScanFlo is the relevant comparison: **₹899 a month or ₹8,999 a year in India, and US$39 a month or US$399 a year elsewhere**, which covers the UK and the Gulf. A Mallu Radiographer CT plan would need to match that or undercut it, or justify a premium with content ScanFlo does not show (artefacts, AEC and off-centring, NHS or Gulf exam prep, phone support).
+- An MRI + CT bundle priced below two separate ScanFlo plans would be a clear differentiator. Two ScanFlo Student plans cost ₹1,898 a month or US$78 a month. This is a suggestion to test, not evidence.
 - **Bundling logic:**
-  1. Competitors already sell MRI and CT together, so a single-modality product looks narrower.
+  1. US competitors sell MRI and CT together. ScanFlo offers both but does not discount the pair. A bundle is an opening.
   2. Gulf job adverts ask for "CT and MRI" experience.
   3. CT has the larger user base, so CT can be the **volume entry product** and MRI the **premium**. Alternatively, sell a discounted "MRI + CT" bundle so CT raises average order value.
 - Expected effect: bundling should increase average revenue per user more than per-modality conversion. That is unquantified.
-- The free demo scan should be CT, not MRI, if the goal is the widest funnel in India. For example: a CT head with a deliberately off-centred patient, showing the AEC dose change. CT scans are more common, and the "dose" hook is a radiation-safety story that resonates with AERB-minded employers. This is an inference.
+- The free demo scan should be CT, not MRI, if the goal is the widest funnel in India. For example: a CT head with a deliberately off-centred patient, showing the AEC dose change. CT scans are more common, and the "dose" hook is a radiation-safety story that resonates with AERB-minded employers. This is an inference. Note that ScanFlo's free trial is more generous than a single demo scan: 45 minutes of console time per product, used within 7 days.
 
 ### Gaps
-- No Indian or Gulf price points for any CT simulator or CT-skills course were found.
+- No AED/SAR-specific pricing was found; ScanFlo charges USD outside India. ScanFlo's institutional seat prices are not public.
 - No survey or experiment quantifies how bundling affects willingness to pay for imaging simulators.
 - Shaderware, RadSimTech and Siemens price levels are unknown (quote-only).
 
@@ -394,20 +486,23 @@ Incumbents bundle. ScanLab sells "One Platform … MRI & CT", and ImagingU pairs
 ## 6. Bottom line: is a CT simulator worth building? (synthesis of the sections above)
 
 ### Takeaway
-Yes, probably, and arguably **before** extending MRI further:
-- CT is the higher-volume modality in all three target markets (England ~1.7× MRI by monthly scans; India ~2–3× by units; Kerala MCH ~3.4× by daily scans).
+Yes, but as a **differentiated** product, not as a first mover:
+- CT is the higher-volume modality in all three target markets: England ~1.7× MRI by monthly scans; India ~1.6× or more by units (8,202 CT); Kerala MCH ~3.4× by daily scans.
 - Gulf exams and jobs explicitly test and ask for CT skills.
-- Competitors are either expensive US bundles, quote-only institutional software, or vendor-locked tools.
+- **ScanFlo CT already sells browser CT simulation from India at ₹899 a month**, with topogram, dose, kernels, contrast-timing guides and MPR/3D. ScanFlo also sells MRI, so the planned "MRI simulator and CT simulator side by side" storefront is close to what scanflo.io already shows.
+- Other competitors are expensive US bundles, quote-only institutional software, or vendor-locked tools.
 - Building it reuses most of the MRI browser architecture, with simpler core physics.
 
 The main risks:
+- **direct competition from ScanFlo** on price and content
 - **regulatory over-claiming**: it must not imply AERB or IR(ME)R recognition
 - **naming confusion** with radiotherapy "CT simulators" in India
 - **realism**: transfer improves when the console resembles the placement scanner
 
 ### Cited Findings
 - CT volume is greater than MRI in England: about 0.71m CT against 0.41m MRI (March 2026) [SEARCH] — [NHS England Statistical Release, July 2026](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/07/Statistical-Release-23rd-July-2026.pdf)
-- India's MRI base of about 4,800 is "3X lower than CT" [SEARCH] — [BioSpectrum India](https://www.biospectrumindia.com/article/pdf/23424)
+- AERB's portal listed 8,202 CT scanners in August 2023, as cited on ScanFlo's blog [LIVE] — [ScanFlo blog](https://scanflo.io/blog/ct-vs-mri-which-modality-to-specialise-in). India has fewer than 5,000 MRI scanners, a 2024 vendor estimate [SEARCH] — [Hyperfine](https://www.businesswire.com/news/home/20240528157535/en)
+- ScanFlo CT costs ₹899 a month or US$39, ScanFlo MRI ₹999 or US$39, and they are sold as separate plans [LIVE] — [scanflo.io/pricing](https://scanflo.io/pricing)
 - Alappuzha MCH: 85 CT scans a day against 25 MRI [SEARCH] — [Onmanorama 2022](https://www.onmanorama.com/news/kerala/2022/04/26/alappuzha-medical-college-fraud.html)
 - SCFHS has a dedicated CT clinical promotion exam (R3, June 2026) [SEARCH] — [SCFHS](https://scfhs.org.sa/sites/default/files/2026-06/CT%20Clinical%20Promotion%20Exam%20Blueprint%20R3.pdf)
 - ScanLabCT + ImagingU costs US$2,500 [SEARCH] — [ScanLab](https://scanlabmr.com/ct-individual-cohorts/)
@@ -419,9 +514,17 @@ The main risks:
   1. CT MVP using the image-space approach, as a single HTML/JS file reusing the MRI phantom and viewer
   2. One free CT demo scan, e.g. a head CT with an off-centring dose lesson
   3. Paid packages: Core CT (head, chest, abdomen with dose and DRLs), Emergency CT (stroke and trauma), Contrast and CTA (bolus tracking), Gulf exam prep
-  4. An MRI + CT bundle
+  4. An MRI + CT bundle, priced below two ScanFlo plans
+- Ways to differentiate from ScanFlo. These are inferred from what its CT page does *not* show:
+  - works on phones (ScanFlo says "laptop or desktop")
+  - offline, single-file delivery
+  - lessons on artefacts and on AEC and off-centring
+  - checks against the UK NDRLs and IR(ME)R wording for UK learners
+  - SCFHS, OMSB and DHA exam-prep mode for Gulf aspirants
+  - Malayalam-community and NHS-radiographer credibility for the brand
+  - contrast-safety scenarios
 - Positioning wording: "CT scanning practice and dose-optimisation trainer. Not a substitute for supervised clinical training or AERB/IR(ME)R competency sign-off."
 
 ### Gaps
 - Willingness to pay in India and Kerala was not found.
-- No direct competitor scan of Indian edtech for radiographers (ScanFlo, ONE Simulation) was possible beyond search snippets, because the fetches were blocked.
+- ScanFlo's user numbers, institutional customers and CT feature depth (e.g. AEC, artefacts) were not verified beyond its marketing pages. ONE Simulation was not checked beyond a search snippet.
